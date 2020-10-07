@@ -27,17 +27,17 @@ public class testRegistrationForm : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (testUsernameField.isFocused && Input.GetKeyDown( KeyCode.Tab ) )
+        if ( testUsernameField.isFocused && Input.GetKeyDown( KeyCode.Tab ) )
         {
         	testUsernameField.DeactivateInputField();
         	testEmailField.ActivateInputField();
         }
-        if (testEmailField.isFocused && Input.GetKeyDown( KeyCode.Tab ) )
+        if ( testEmailField.isFocused && Input.GetKeyDown( KeyCode.Tab ) )
         {
         	testEmailField.DeactivateInputField();
         	testPWordField.ActivateInputField();
         }
-        if (testPWordField.isFocused && Input.GetKeyDown( KeyCode.Tab ) )
+        if ( testPWordField.isFocused && Input.GetKeyDown( KeyCode.Tab ) )
         {
         	testPWordField.DeactivateInputField();
         	testConfirmPWordField.ActivateInputField();
@@ -53,13 +53,16 @@ public class testRegistrationForm : MonoBehaviour
 
     public void RegisterButtonClicked()
     {
-    	// about to test sending all this to localhost
     	string usernameText = testUsernameField.text;
     	string emailText = testEmailField.text;
     	string PWText = testPWordField.text;
     	string confirmPWText = testConfirmPWordField.text;
-    	Debug.Log( usernameText + " " + emailText + " " + PWText + " " + confirmPWText );
-        string hash = MD5.Md5Sum(usernameText + PWText);
-        StartCoroutine(testServerConnect.PostTestUserRegistration(usernameText, emailText, hash, responseText));
+    	if ( PWText == confirmPWText )
+    	{
+    		Debug.Log( usernameText + " " + emailText + " " + PWText + " " + confirmPWText );
+	        string pwhash = MD5.Md5Sum(usernameText + PWText);
+	        StartCoroutine( testServerConnect.PostTestUserRegistration( usernameText, emailText, pwhash ));
+    	}
+    	else Debug.Log( "Passwords do not match!" );
     }
 }

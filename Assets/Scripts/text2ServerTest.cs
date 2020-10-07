@@ -27,16 +27,13 @@ public class text2ServerTest : MonoBehaviour
     	{
     		string input = testInputField.text;
     		enterUp = false;
-    		Debug.Log( "Detected key down: Return" );
-    		Debug.Log( input );
     		StartCoroutine(testServerConnect.PostTestStr( input ));
     	}
     	if ( Input.GetKeyDown(KeyCode.Return) && !enterUp )
     	{
     		enterUp = true;
             testInputFocus = false;
-    		Debug.Log( "Detected key up: Return" );
-    		StartCoroutine(testServerConnect.GetTestStr( this.gameObject.transform.Find( "Text (TMP)" )));
+    		StartCoroutine( testServerConnect.GetTestStr());
     	}
     }
 }

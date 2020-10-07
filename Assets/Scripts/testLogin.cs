@@ -15,14 +15,14 @@ public class testLogin : MonoBehaviour
     {
         canvas = this.gameObject.transform;
         responseText = canvas.Find("loginResponse");
-    	testUsernameField = canvas.Find("UsernameLogin").GetComponent<TMP_InputField>();
+    	testUsernameField = canvas.Find("UserNameLogin").GetComponent<TMP_InputField>();
     	testPWordField = canvas.Find("PWordLogin").GetComponent<TMP_InputField>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (testUsernameField.isFocused && Input.GetKeyDown( KeyCode.Tab ) )
+        if ( testUsernameField.isFocused && Input.GetKeyDown( KeyCode.Tab ) )
         {
         	testUsernameField.DeactivateInputField();
         	testPWordField.ActivateInputField();
@@ -42,6 +42,6 @@ public class testLogin : MonoBehaviour
 		string testPWord = testPWordField.text;
 		Debug.Log(testUsername + " " + testPWord);
         string hash = MD5.Md5Sum(testUsername + testPWord);
-        StartCoroutine(testServerConnect.GetAuthenticatedTest(testUsername, hash, responseText));
+        StartCoroutine( testServerConnect.GetAuthenticatedTest( testUsername, hash ));
     }
 }
